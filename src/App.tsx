@@ -1,5 +1,6 @@
 import React from 'react'
 import * as THREE from 'three'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 
 interface State {
   lineLength: string
@@ -14,6 +15,7 @@ class App extends React.Component<{}, State> {
   camera?: THREE.PerspectiveCamera
   renderer?: THREE.WebGLRenderer
   line?: THREE.Line
+  controls?: OrbitControls
 
   state: State = {
     lineLength: '20',
@@ -54,9 +56,21 @@ class App extends React.Component<{}, State> {
     if (this.mountRef.current) {
       this.mountRef.current.appendChild(this.renderer.domElement)
     }
+    
+    // Add OrbitControls
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+    this.controls.enableDamping = true
+    this.controls.dampingFactor = 0.05
+    
     this.camera.position.z = 10
     this.createLine()
-    this.renderer.render(this.scene, this.camera)
+    this.animate()
+  }
+
+  animate = () => {
+    requestAnimationFrame(this.animate)
+    this.controls?.update()
+    this.renderer?.render(this.scene!, this.camera!)
   }
 
   createLine() {
@@ -149,7 +163,6 @@ class App extends React.Component<{}, State> {
       this.camera.position.z = fitZ
       this.camera.updateProjectionMatrix()
     }
-    this.renderer?.render(this.scene!, this.camera!)
   }
 
   handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
