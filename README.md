@@ -44,19 +44,7 @@ npm run dev
 
 ## Usage
 
-### Basic Line Creation
-- Use the "Line Length" input to set the length of your line
-- The line will be centered at the origin and displayed horizontally
-
-### Adding Bends
-- **Bend Angle**: Enter the angle in degrees (positive for upward bend, negative for downward)
-- **Bend Start**: Specify where along the line the bend should begin (distance from start)
-- **Bend Stop**: Specify where the bend should end (must be greater than Bend Start)
-
-### Controls
-- The line will automatically update as you change the input values
-- The camera will automatically zoom to ensure the entire line is visible
-- Line thickness scales with length (1% of length, minimum 5 pixels)
+TODO
 
 ## Development
 
@@ -78,11 +66,6 @@ src/
 ### Building for Production
 ```bash
 npm run build
-```
-
-### Preview Production Build
-```bash
-npm run preview
 ```
 
 ## License
