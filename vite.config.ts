@@ -3,9 +3,11 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
+  const base = "/quoter_app/";
   if (command === 'build' && mode === 'lib') {
     // Library build for npm publishing
     return {
+      base,
       plugins: [react()],
       build: {
         lib: {
