@@ -9,6 +9,9 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     
     steps:
       - name: Checkout code
@@ -18,7 +21,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@${{ github.repository_owner }}'
           
       - name: Install dependencies
         run: npm ci
@@ -26,13 +30,17 @@ jobs:
 #      - name: Run linting
 #        run: npm run lint
         
+      - name: Update package name
+        run: |
+          sed -i "s/@GITHUB_USERNAME/@${{ github.repository_owner }}/g" package.json
+        
       - name: Build library
         run: npm run build:lib
         
-      - name: Publish to npm
+      - name: Publish to GitHub Packages
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Create GitHub Release
         uses: actions/create-release@v1
