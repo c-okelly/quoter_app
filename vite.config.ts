@@ -32,6 +32,7 @@ export default defineConfig(({ command, mode }) => {
   
   // Default development build
   return {
+    base,
     plugins: [react()],
   }
 })
