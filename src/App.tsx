@@ -29,7 +29,7 @@ class App extends React.Component<{}, State> {
   }
 
   // TODO: Need to have this as bend Radius, bend length, start point
-  componentDidUpdate(prevProps: {}, prevState: State) {
+  componentDidUpdate(prevState: State) {
     if (
       prevState.lineLength !== this.state.lineLength ||
       prevState.bendRadius !== this.state.bendRadius ||
