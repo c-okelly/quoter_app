@@ -27,7 +27,7 @@ class App extends React.Component<{}, State> {
   componentDidMount() {
     this.initThree()
   }
-
+// TODO fix this
   // TODO: Need to have this as bend Radius, bend length, start point
   componentDidUpdate(prevState: State) {
     if (

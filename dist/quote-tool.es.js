@@ -751,6 +751,7 @@ class Ft extends et.Component {
   componentDidMount() {
     this.initThree();
   }
+  // TODO fix this
   // TODO: Need to have this as bend Radius, bend length, start point
   componentDidUpdate(t) {
     (t.lineLength !== this.state.lineLength || t.bendRadius !== this.state.bendRadius || t.bendLength !== this.state.bendLength || t.bendStart !== this.state.bendStart) && this.updateLine();
