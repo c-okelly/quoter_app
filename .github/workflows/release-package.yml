@@ -28,7 +28,10 @@ jobs:
       - name: Build library
         run: npm run build:lib
         
-      - name: Publish to GitHub Packages
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and push dist files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add dist/
+          git commit -m "Build: Add dist files for release ${{ github.ref_name }}" || exit 0
+          git push origin HEAD:${{ github.ref_name }}
