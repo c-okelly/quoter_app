@@ -1,6 +1,6 @@
 {
   "name": "@c-okelly/quote-tool",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": false,
   "description": "A React-based 3D simulation tool that allows you to create and manipulate lines in 3D space. Built with React, TypeScript, Vite, and Three.js.",
   "homepage": "https://github.com/c-okelly/quoter_app#readme",
