@@ -1,11 +1,25 @@
 {
   "name": "quote-tool",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
+  "main": "dist/quote-tool.umd.js",
+  "module": "dist/quote-tool.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/quote-tool.es.js",
+      "require": "./dist/quote-tool.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:lib": "tsc -p tsconfig.lib.json && vite build --mode lib",
     "lint": "eslint .",
     "preview": "vite preview"
   },

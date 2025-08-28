@@ -1,6 +1,30 @@
-# 3D Line Simulation Tool
+# Quote Tool
 
 A React-based 3D simulation tool that allows you to create and manipulate lines in 3D space. Built with React, TypeScript, Vite, and Three.js.
+
+## Installation
+
+```bash
+npm install quote-tool
+```
+
+## Usage
+
+```jsx
+import React from 'react';
+import { QuoteTool } from 'quote-tool';
+
+function App() {
+  return (
+    <div>
+      <h1>My 3D Line Tool</h1>
+      <QuoteTool />
+    </div>
+  );
+}
+```
+
+## Development
 
 ## Features
 
