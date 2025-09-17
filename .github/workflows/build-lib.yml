@@ -1,0 +1,59 @@
+name: Build Library
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build library
+        run: npm run build:lib
+        
+      - name: Upload dist files
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist/
+          
+      - name: Create release on tag
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          body: |
+            ## Built Files
+            
+            This release includes the built library files from the `dist/` directory.
+            
+            ### Files included:
+            - `quote-tool.es.js` - ES module format
+            - `quote-tool.umd.js` - UMD format
+            - `*.d.ts` - TypeScript declaration files
+            
+            ### Usage:
+            ```javascript
+            import { QuoteTool } from './quote-tool.es.js';
+            ```
